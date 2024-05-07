@@ -2,30 +2,24 @@ services:
   app:
     image: robinalfengard/user-service:1.0
     depends_on:
-      mysql:
-        condition: service_healthy
+      - mysql
     ports:
       - '8080:8080'
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/userdatabase
       SPRING_DATASOURCE_USERNAME: developer
       SPRING_DATASOURCE_PASSWORD: secret
-      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_PlATFORM: mysql
     restart: on-failure
 
   mysql:
-    image: 'mysql:latest'
+    image: 'mysql:8.3.0'
     environment:
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: developer
       MYSQL_DATABASE: userdatabase
-    restart: on-failure
     ports:
       - '3306:3306'
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+
