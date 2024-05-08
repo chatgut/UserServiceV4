@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: user-service-pod
+  labels:
+    role: user-api
+spec:
+  containers:
+    - name: user-service
+      image: robinalfengard/user-servicev4:1.0
+      ports:
+        - containerPort: 8080
+      env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql:3306/userdatabase
+        - name: SPRING_DATASOURCE_USERNAME
+          value: developer
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: secret
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: update
+        - name: SPRING_JPA_PLATFORM
+          value: mysql
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    role: db
+spec:
+  containers:
+    - name: mysql
+      image: 'mysql:8.3.0'
+      ports:
+        - containerPort: 3306
+      env:
+        - name: MYSQL_PASSWORD
+          value: secret
+        - name: MYSQL_ROOT_PASSWORD
+          value: secret
+        - name: MYSQL_USER
+          value: developer
+        - name: MYSQL_DATABASE
+          value: userdatabase
+
+

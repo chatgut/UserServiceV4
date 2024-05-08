@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-v4-deployment
+  labels:
+    app: user-service-v4-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service-v4
+  template:
+    metadata:
+      labels:
+        app: user-service-v4
+    spec:
+      containers:
+        - name: user-service-v4-deployment
+          image: robinalfengard/user-servicev4:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/userdatabase
+            - name: SPRING_DATASOURCE_USERNAME
+              value: developer
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: secret
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
+            - name: SPRING_JPA_PLATFORM
+              value: mysql
