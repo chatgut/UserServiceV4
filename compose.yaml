@@ -1,6 +1,6 @@
 services:
   app:
-    image: robinalfengard/user-servicev4:1.0
+    image: robinalfengard/user-servicev4:1.5
     depends_on:
       - mysql
     ports:

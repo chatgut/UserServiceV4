@@ -33,6 +33,11 @@ public class Controller {
         return userService.createUser(user);
     }
 
+    @PutMapping("/user/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+
 
 
 }

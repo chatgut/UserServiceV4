@@ -34,4 +34,20 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public ResponseEntity<String> updateUser(Long id, User editedUser) {
+        User user = userRepository.findById(id).get();
+        if(user != null) {
+            user.setUserName(editedUser.getUserName());
+            user.setImgUrl(editedUser.getImgUrl());
+            userRepository.save(user);
+            return ResponseEntity
+                    .status(201)
+                    .build();
+        } else {
+            return ResponseEntity
+                    .status(400)
+                    .body("Invalid input");
+        }
+    }
 }
