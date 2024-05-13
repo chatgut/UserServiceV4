@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public Optional<User> getUser(Long id) {
-        return Optional.of(userRepository.findByUserId(id.toString()));
+        return Optional.of(userRepository.findById(id).get());
     }
 
 
