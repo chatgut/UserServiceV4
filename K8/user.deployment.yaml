@@ -19,11 +19,20 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mysql:3306/userdatabase
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: database-url
             - name: SPRING_DATASOURCE_USERNAME
-              value: developer
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
             - name: SPRING_DATASOURCE_PASSWORD
-              value: secret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret-pass
+                  key: password
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: update
             - name: SPRING_JPA_PLATFORM
@@ -50,10 +59,22 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_PASSWORD
-              value: secret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret-pass
+                  key: password
             - name: MYSQL_ROOT_PASSWORD
-              value: secret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret-pass
+                  key: password
             - name: MYSQL_USER
-              value: developer
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
             - name: MYSQL_DATABASE
-              value: userdatabase
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: database
