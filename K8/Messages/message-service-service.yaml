@@ -3,9 +3,8 @@ kind: Service
 metadata:
   name: message-service
 spec:
-  type: ClusterIP
   selector:
-    role: message-service
+    app: message-service
   ports:
     - protocol: TCP
       port: 8000

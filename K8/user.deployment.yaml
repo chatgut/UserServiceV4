@@ -83,103 +83,67 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: message-db-deployment
+  name: message-db
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      role: message-db
+      app: message-db
   template:
     metadata:
       labels:
-        role: message-db
+        app: message-db
     spec:
       containers:
-        - name: mongo-db
-          image: 'mongo:latest'
+        - name: message-db
+          image: mongo:latest
           ports:
             - containerPort: 27017
-          env:
-            - name: mongo-db
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: username
-            - name: MONGO_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret-pass
-                  key: password
-            - name: MONGO_DB_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mongo-db-config
-                  key: database
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: message-service-deployment
+  name: message-service
 spec:
   selector:
     matchLabels:
-      role: message-service
+      app: message-service
   template:
     metadata:
       labels:
-        role: message-service
+        app: message-service
     spec:
-      restartPolicy: Always
       containers:
         - name: message-service
-          image: 'ghcr.io/chatgut/micropostservice:main'
+          image: ghcr.io/chatgut/micropostservice:main
           ports:
             - containerPort: 8000
           env:
             - name: ROCKET_DATABASES
-              value: '{postservice={url="mongodb://mongo-db:27017/messagedatabase"}}'
+              value: '{postservice={url="mongodb://message-db:27017"}}'
             - name: ROCKET_RABBIT_HOST
-              value: "amqp://rabitmq:5672"
-#            - name: MONGO_DB_USER
-#              valueFrom:
-#                secretKeyRef:
-#                  name: mysql-secret
-#                  key: username
-#            - name: MONGO_DB_PASSWORD
-#              valueFrom:
-#                secretKeyRef:
-#                  name: mysql-secret-pass
-#                  key: password
-#            - name: MONGO_DB_DATABASE
-#              valueFrom:
-#                configMapKeyRef:
-#                  name: mongo-db-config
-#                  key: database
-#            - name: RABBITMQ_HOST
-#              value: "rabbitmq"
-#            - name: RABBITMQ_PORT
-#              value: "15672"
+              value: "amqp://rabbitmq:5672"
+      restartPolicy: Always
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rabbitmq-deployment
+  name: rabbitmq
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      role: rabbitmq
+      app: rabbitmq
   template:
     metadata:
       labels:
-        role: rabbitmq
+        app: rabbitmq
     spec:
       containers:
         - name: rabbitmq
-          image: 'rabbitmq:3-management'
+          image: rabbitmq:3-management
           ports:
-            - containerPort: 15672
             - containerPort: 5672
+            - containerPort: 15672
 
 ---
 apiVersion: apps/v1
