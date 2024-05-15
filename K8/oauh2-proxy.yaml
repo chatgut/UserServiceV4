@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy-config
+data:
+  OAUTH2_PROXY_CLIENT_ID: "robinalfengard"
+  OAUTH2_PROXY_CLIENT_SECRET: "Ov23liai8gl4GwGC3rqU"
+  OAUTH2_PROXY_COOKIE_SECRET: "ZHJvcHBlZGlzYXRvbWljb3JkZXJtb3RvcnByb2R1Y3Rpb25wcm90ZWN0aW9ucGluZXA="
+  __INGRESS_HOST__: "localhost:80"

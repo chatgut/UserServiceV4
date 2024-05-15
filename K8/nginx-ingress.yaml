@@ -17,6 +17,14 @@ spec:
                 name: user-service
                 port:
                   number: 8080
+          - path: /messages(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: message-service
+                port:
+                  number: 8081
+
 
 
                 
