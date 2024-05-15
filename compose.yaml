@@ -25,22 +25,24 @@ services:
 
   message-db:
     image: 'mongo:latest'
-    environment:
-      MONGO_DB_USERNAME: developer
-      MONGO_DB_PASSWORD: secret
-      MONGO_DB_DATABASE: messagedatabase
+    container_name: 'message-db'
     ports:
       - '27017:27017'
 
   message-service:
     image: 'ghcr.io/chatgut/micropostservice:main'
+    restart: on-failure
     ports:
       - '8000:8000'
     environment:
-      ROCKET_DATABASES: '{postservice={url="mongodb://mongo-db:27017/messagedatabase"}}'
-      ROCKET_RABBIT_HOST: "amqp://rabitmq:5672"
+      ROCKET_DATABASES: '{postservice={url="mongodb://message-db:27017"}}'
+      ROCKET_RABBIT_HOST: "amqp://rabbitmq:5672"
+    depends_on:
+      - rabbitmq
+      - message-db
 
   rabbitmq:
+    container_name: 'rabbitmq'
     image: 'rabbitmq:3-management'
     ports:
       - '15672:15672'
