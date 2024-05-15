@@ -4,5 +4,5 @@ metadata:
   name: mongo-db-config
 data:
   database: "messagedatabase"
-  database-url: "mongodb://mongo:27017/messagedatabase"
+  database-url: "mongodb://mongo-db:27017/messagedatabase"
   

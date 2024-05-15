@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-database
+spec:
+  type: ClusterIP
+  selector:
+    role: image-database
+  ports:
+    - protocol: TCP
+      port: 3309
+      targetPort: 3309
+  

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  user-database: "userdatabase"
+  user-database-url: "jdbc:mysql://mysql:3306/userdatabase"
+  image-database-url: "jdbc:mysql://mysql:3307/imagedatabase"
+  image-database: "imagedatabase"
+  
