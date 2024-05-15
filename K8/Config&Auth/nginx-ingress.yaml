@@ -10,7 +10,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /users(/|$)(.*)
+          - path: /api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
@@ -24,13 +24,20 @@ spec:
                 name: message-service
                 port:
                   number: 8000
-          - path: /(/|$)(.*)
+          - path: /frontend
             pathType: Prefix
             backend:
               service:
                 name: frontend-service
                 port:
                   number: 8080
+          - path: /images/(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: image-service
+                port:
+                  number: 8001
 
 
 
