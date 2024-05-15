@@ -5,6 +5,6 @@ metadata:
 data:
   user-database: "userdatabase"
   user-database-url: "jdbc:mysql://mysql:3306/userdatabase"
-  image-database-url: "jdbc:mysql://mysql:3307/imagedatabase"
+  image-database-url: "jdbc:mysql://mysql:3306/imagedatabase"
   image-database: "imagedatabase"
   

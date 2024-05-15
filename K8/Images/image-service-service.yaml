@@ -5,9 +5,8 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    role: image-service
+    app: image-service
   ports:
     - protocol: TCP
       port: 8001
       targetPort: 8001
-  

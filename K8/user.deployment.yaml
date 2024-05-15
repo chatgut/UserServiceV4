@@ -210,37 +210,29 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      role: image-service
+      app: image-service
   template:
     metadata:
       labels:
-        role: image-service
+        app: image-service
     spec:
       containers:
         - name: image-service
-          image: 'ghcr.io/chatgut/imageservicebov:sha-925024f'
+          image: ghcr.io/chatgut/imageservicebov:sha-925024f
           ports:
             - containerPort: 8001
           env:
             - name: SPRING_DATASOURCE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config
-                  key: image-database-url
+              value: jdbc:mysql://image-database:3306/imagedatabase
             - name: SPRING_DATASOURCE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: username
+              value: developer
             - name: SPRING_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret-pass
-                  key: password
+              value: secret
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: update
             - name: SPRING_JPA_PLATFORM
-              value: mysql
+              value: image-database
+      restartPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -250,36 +242,24 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      role: image-database
+      app: image-database
   template:
     metadata:
       labels:
-        role: image-database
+        app: image-database
     spec:
       containers:
         - name: image-database
-          image: 'mysql:8.3.0'
+          image: mysql:8.3.0
           ports:
-            - containerPort: 3309
+            - containerPort: 3306
           env:
             - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret-pass
-                  key: password
+              value: secret
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret-pass
-                  key: password
+              value: secret
             - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: username
+              value: developer
             - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config
-                  key: image-database
+              value: imagedatabase
 
