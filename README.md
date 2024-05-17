@@ -46,6 +46,8 @@ This is a micro service built for ITHS project ChatGut in 2024. It is a REST API
      
         POST http://localhost:8081/user
 
+  IF succesfull return 201, else 400
+
 <h3>PUT Request</h3>
      - Update a user based on id and updated json body sent in the following format
 
@@ -56,10 +58,11 @@ This is a micro service built for ITHS project ChatGut in 2024. It is a REST API
      
         PUT http://localhost:8081/user/1
 
-
+IF succesfull return 201, else 400
 <h3>Delete Request</h3>
      - Delete a user based on id
 
      
         Delete http://localhost:8081/1
   
+IF succesfull return 201, else 400
