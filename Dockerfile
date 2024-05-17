@@ -7,7 +7,7 @@ RUN mkdir -p /app/target/dependency && (cd /app/target/dependency; jar -xf ../*.
 FROM eclipse-temurin:22-jre-alpine
 ARG DEPENDENCY=/app/target/dependency
 
-ENV SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/userdatabase
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/userdatabase
 ENV SPRING_DATASOURCE_USERNAME=developer
 ENV SPRING_DATASOURCE_PASSWORD=secret
 ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
