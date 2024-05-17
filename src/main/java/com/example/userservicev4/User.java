@@ -18,21 +18,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
-    private String userId;
-    private int numberOfMessages;
     private String imgUrl;
 
 
     public User() {
     }
 
-    public User(String userName, String userId, int numberOfMessages, String imgUrl) {
+    public User(String userName, String userId, String imgUrl) {
         this.userName = userName;
-        this.userId = userId;
-        this.numberOfMessages = numberOfMessages;
         this.imgUrl = imgUrl;
     }
-
-
 
 }
