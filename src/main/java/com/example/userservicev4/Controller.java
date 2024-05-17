@@ -38,6 +38,11 @@ public class Controller {
         return userService.updateUser(id, user);
     }
 
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        return userService.deleteUser(id);
+    }
+
 
 
 }

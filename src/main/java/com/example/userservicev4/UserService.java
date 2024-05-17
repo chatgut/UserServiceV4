@@ -50,4 +50,18 @@ public class UserService {
                     .body("Invalid input");
         }
     }
+
+    public ResponseEntity<String> deleteUser(Long id) {
+        User user = userRepository.findById(id).get();
+        if(user != null) {
+            userRepository.delete(user);
+            return ResponseEntity
+                    .status(201)
+                    .build();
+        } else {
+            return ResponseEntity
+                    .status(400)
+                    .body("Invalid input");
+        }
+    }
 }
