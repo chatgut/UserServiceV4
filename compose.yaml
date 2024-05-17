@@ -1,10 +1,10 @@
 services:
   app:
-    image: robinalfengard/user-servicev4:1.5
+    image: robinalfengard/user-servicev4:1.0
     depends_on:
       - mysql
     ports:
-      - '8081:8081'
+      - 8081:8081
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/userdatabase
       SPRING_DATASOURCE_USERNAME: developer

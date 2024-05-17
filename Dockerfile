@@ -6,6 +6,13 @@ RUN mkdir -p /app/target/dependency && (cd /app/target/dependency; jar -xf ../*.
 
 FROM eclipse-temurin:22-jre-alpine
 ARG DEPENDENCY=/app/target/dependency
+
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/userdatabase
+ENV SPRING_DATASOURCE_USERNAME=developer
+ENV SPRING_DATASOURCE_PASSWORD=secret
+ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
+ENV SPRING_JPA_PlATFORM=mysql
+
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
