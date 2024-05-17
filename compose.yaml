@@ -6,7 +6,7 @@ services:
     ports:
       - 8081:8081
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/userdatabase
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/userdatabase
       SPRING_DATASOURCE_USERNAME: developer
       SPRING_DATASOURCE_PASSWORD: secret
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
