@@ -24,4 +24,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push Docker Image to Docker Hub
-        run: docker push robinalfengard/user-servicev4:1.0
+        run: docker push robinalfengard/user-servicev4:2.1
