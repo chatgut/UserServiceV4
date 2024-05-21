@@ -1,13 +1,12 @@
 package com.example.userservicev4;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,14 +18,17 @@ public class User {
     private Long id;
     private String userName;
     private String imgUrl;
+    private String userId;
 
 
     public User() {
+        userId = UUID.randomUUID().toString();
     }
 
-    public User(String userName, String userId, String imgUrl) {
+    public User(String userName, String imgUrl) {
         this.userName = userName;
         this.imgUrl = imgUrl;
+        userId = UUID.randomUUID().toString();
     }
 
 }
