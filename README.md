@@ -16,7 +16,7 @@ This is a micro service built for ITHS project ChatGut in 2024. It is a REST API
 
 - Create a network: docker network create mynetwork    
 - Setup DB: docker run -d --name mysql-container --network mynetwork -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_PASSWORD=secret -e MYSQL_USER=developer MYSQL_DATABASE=userdatabase mysql:latest
-- Setup Userservice: docker run -d --name user-service-v1 --network mynetwork -p 8081:8081 robinalfengard/user-servicev4:1.0
+- Setup Userservice: docker run -d --name user-service-v1 --network mynetwork -p 8081:8081 robinalfengard/user-servicev4:2.0
   
 
 <h2>Endpoints</h2>
